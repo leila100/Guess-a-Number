@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, View, Text, TextInput, Button } from "react-native";
 
 import Card from "../Card";
+import Colors from "../../constants/colors";
 
 const StartGame = () => {
   return (
@@ -11,8 +12,12 @@ const StartGame = () => {
         <Text>Select a Number</Text>
         <TextInput />
         <View style={styles.buttonsContainer}>
-          <Button title='Reset' onPress={() => {}} />
-          <Button title='Confirm' onPress={() => {}} />
+          <View style={styles.button}>
+            <Button title='Reset' onPress={() => {}} color={Colors.secondary} />
+          </View>
+          <View style={styles.button}>
+            <Button title='Confirm' onPress={() => {}} color={Colors.primary} />
+          </View>
         </View>
       </Card>
     </View>
@@ -39,6 +44,11 @@ const styles = StyleSheet.create({
     width: 300,
     maxWidth: "80%",
     alignItems: "center"
+  },
+  button: {
+    width: 100,
+    maxWidth: "40%",
+    margin: 0
   }
 });
 
