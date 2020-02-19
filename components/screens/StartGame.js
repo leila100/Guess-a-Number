@@ -6,10 +6,10 @@ import Input from "../Input";
 import NumberContainer from "../NumberContainer";
 import Colors from "../../constants/colors";
 
-const StartGame = () => {
+const StartGame = props => {
   const [inputVal, setInputVal] = useState("");
   const [confirmed, setConfirmed] = useState(false);
-  const [SelectedNumber, setSelectedNumber] = useState("");
+  const [selectedNumber, setSelectedNumber] = useState("");
 
   const inputHandler = inputText => {
     setInputVal(inputText.replace(/[^0-9]/g, ""));
@@ -39,8 +39,8 @@ const StartGame = () => {
     confirmedOutput = (
       <Card style={styles.confirmCard}>
         <Text>You selected</Text>
-        <NumberContainer>{SelectedNumber}</NumberContainer>
-        <Button title='START GAME' />
+        <NumberContainer>{selectedNumber}</NumberContainer>
+        <Button title='START GAME' onPress={() => props.onStartGame(selectedNumber)} />
       </Card>
     );
   }
