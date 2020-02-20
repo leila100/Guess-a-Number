@@ -9,7 +9,7 @@ const generateRandomNum = (min, max, exclude) => {
   max = Math.floor(max);
   // generate random number between min and max
   const rdm = Math.floor(Math.random() * (max - min)) + min;
-  if (rdm === exclude) generateRandomNum(min, max, exclude);
+  if (rdm === exclude) return generateRandomNum(min, max, exclude);
   else return rdm;
 };
 
@@ -41,7 +41,7 @@ const GameScreen = props => {
     } else if (direction === "greater") {
       currentLow.current = currentGuess;
     }
-    const nextGuess = generateRandomNum(currentLow.current, currentHigh.current + 1, currentGuess);
+    const nextGuess = generateRandomNum(currentLow.current, currentHigh.current, currentGuess);
     setCurrentGuess(nextGuess);
     setRounds(prevRounds => prevRounds + 1);
   };
