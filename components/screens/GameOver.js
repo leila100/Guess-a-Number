@@ -3,23 +3,21 @@ import { StyleSheet, View, Text, Button, Image } from "react-native";
 
 import BodyText from "../BodyText";
 import TitleText from "../TitleText";
+import Colors from "../../constants/colors";
 
 const GameOver = props => {
   return (
     <View style={styles.screen}>
       <TitleText>The game is over!!!!</TitleText>
       <View style={styles.imageContainer}>
-        {/* <Image source={require("../../assets/success.png")} style={styles.image} /> */}
-        <Image
-          source={{
-            uri:
-              "https://merriam-webster.com/assets/mw/images/article/art-wap-landing-mp-lg/alt-597f43cca08a4-4012-4a67efa4a1926905348cbc133634f7ff@1x.jpg"
-          }}
-          style={styles.image}
-        />
+        <Image source={require("../../assets/success.png")} style={styles.image} />
       </View>
-      <BodyText>Number of rounds: {props.rounds}</BodyText>
-      <BodyText>Number was: {props.userNumber}</BodyText>
+      <View style={styles.resultContainer}>
+        <BodyText style={styles.resultText}>
+          Your phone needed <Text style={styles.highlight}>{props.rounds}</Text> rounds to guess the number{" "}
+          <Text style={styles.highlight}>{props.userNumber}</Text>
+        </BodyText>
+      </View>
       <Button title='Play again' onPress={props.playAgain} />
     </View>
   );
@@ -44,6 +42,19 @@ const styles = StyleSheet.create({
     borderColor: "black",
     overflow: "hidden",
     marginVertical: 30
+  },
+  highlight: {
+    color: Colors.primary,
+    fontFamily: "open-sans-bold"
+  },
+  resultContainer: {
+    width: "80%",
+    marginHorizontal: 30,
+    marginVertical: 15
+  },
+  resultText: {
+    textAlign: "center",
+    fontSize: 20
   }
 });
 
