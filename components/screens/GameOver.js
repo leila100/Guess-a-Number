@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Text, Image, Dimensions, ScrollView } from "react-native";
 
 import BodyText from "../BodyText";
@@ -7,15 +7,37 @@ import Colors from "../../constants/colors";
 import MainButton from "../MainButton";
 
 const GameOver = props => {
+  const [deviceWidth, setDeviceWidth] = useState(Dimensions.get("window").width);
+  const [deviceHeight, setDeviceHeight] = useState(Dimensions.get("window").height);
+
+  useEffect(() => {
+    const updateLayout = () => {
+      setDeviceWidth(Dimensions.get("window").width);
+      setDeviceHeight(Dimensions.get("window").height);
+    };
+    Dimensions.addEventListener("change", updateLayout);
+    return () => {
+      Dimensions.removeEventListener("change", updateLayout);
+    };
+  });
+
   return (
     <ScrollView>
       <View style={styles.screen}>
         <TitleText>The game is over!!!!</TitleText>
-        <View style={styles.imageContainer}>
+        <View
+          style={{
+            ...styles.imageContainer,
+            width: deviceWidth * 0.7,
+            height: deviceWidth * 0.7,
+            borderRadius: (deviceWidth * 0.7) / 2,
+            marginVertical: deviceHeight / 30
+          }}
+        >
           <Image source={require("../../assets/success.png")} style={styles.image} />
         </View>
-        <View style={styles.resultContainer}>
-          <BodyText style={styles.resultText}>
+        <View style={{ ...styles.resultContainer, marginVertical: deviceHeight / 60 }}>
+          <BodyText style={{ ...styles.resultText, fontSize: deviceWidth < 350 ? 16 : 20 }}>
             Your phone needed <Text style={styles.highlight}>{props.rounds}</Text> rounds to guess the number{" "}
             <Text style={styles.highlight}>{props.userNumber}</Text>
           </BodyText>
@@ -30,7 +52,8 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    paddingVertical: 10
   },
   image: {
     width: "100%",
@@ -38,13 +61,9 @@ const styles = StyleSheet.create({
     resizeMode: "cover"
   },
   imageContainer: {
-    height: Dimensions.get("window").width * 0.7,
-    width: Dimensions.get("window").width * 0.7,
-    borderRadius: (Dimensions.get("window").width * 0.7) / 2,
     borderWidth: 3,
     borderColor: "black",
-    overflow: "hidden",
-    marginVertical: Dimensions.get("window").height / 30
+    overflow: "hidden"
   },
   highlight: {
     color: Colors.primary,
@@ -52,12 +71,10 @@ const styles = StyleSheet.create({
   },
   resultContainer: {
     width: "80%",
-    marginHorizontal: 30,
-    marginVertical: Dimensions.get("window").height / 60
+    marginHorizontal: 30
   },
   resultText: {
-    textAlign: "center",
-    fontSize: Dimensions.get("window").width < 350 ? 16 : 20
+    textAlign: "center"
   }
 });
 

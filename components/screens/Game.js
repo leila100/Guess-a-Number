@@ -104,7 +104,7 @@ const GameScreen = props => {
     <View style={styles.screen}>
       <Text style={defaultStyles.titleText}>Opponent's Guess</Text>
       <NumberContainer>{currentGuess}</NumberContainer>
-      <Card style={styles.buttonContainer}>
+      <Card style={{ ...styles.buttonContainer, marginTop: deviceHeight > 600 ? 20 : 10 }}>
         <MainButton onPress={() => nextGuessHandler("lower")}>
           <Ionicons name='md-remove' size={24} color='white' />
         </MainButton>
@@ -133,7 +133,6 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: "row",
     justifyContent: "space-around",
-    marginTop: Dimensions.get("window").height > 600 ? 20 : 5,
     width: 400,
     maxWidth: "90%"
   },
