@@ -44,7 +44,6 @@ export default function App() {
   else if (guessRounds > 0)
     screen = <GameOver rounds={guessRounds} userNumber={userNumber} playAgain={playAgainHandler} />;
 
-  screen = <GameOver rounds={1} userNumber={1} playAgain={playAgainHandler} />;
   return (
     <View style={styles.screen}>
       <Header title='Guess a Number' />

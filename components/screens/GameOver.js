@@ -4,6 +4,7 @@ import { StyleSheet, View, Text, Button, Image } from "react-native";
 import BodyText from "../BodyText";
 import TitleText from "../TitleText";
 import Colors from "../../constants/colors";
+import MainButton from "../MainButton";
 
 const GameOver = props => {
   return (
@@ -18,7 +19,7 @@ const GameOver = props => {
           <Text style={styles.highlight}>{props.userNumber}</Text>
         </BodyText>
       </View>
-      <Button title='Play again' onPress={props.playAgain} />
+      <MainButton onPress={props.playAgain}>Play again </MainButton>
     </View>
   );
 };
